@@ -37,7 +37,9 @@ func newMongoClient(mongoUrl string, mongoTimeout int) (*mongo.Client, error) {
 	return client, nil
 }
 
-// Factory function for creating a MongoDB repository instance
+// Factory function for creating a MongoDB repository instance that implements the
+// shortener/repository interface... Just handles the setup of the MongoDB connection and client
+// and returns the fully implemented interface
 func NewMongoRepository(mongoUrl, mongoDB string, mongoTimeout int) (shortener.RedirectRepository, error) {
 	repo := &mongoRepository{
 		timeout:  time.Duration(mongoTimeout) * time.Second,

@@ -14,6 +14,9 @@ var (
 	ErrRedirectInvalid  = errors.New("Redirect Invalid")
 )
 
+// Our redirectService will be very simple, it just houses the repository interface
+// implementation (mongodb, redis, SQL) and implements the methods specified by the
+// service interface.
 type redirectService struct {
 	redirectRepo RedirectRepository
 }
@@ -24,6 +27,9 @@ func NewRedirectService(redirectRepo RedirectRepository) RedirectService {
 	}
 }
 
+// Super simple implementation of the Find method specified in the service interface,
+// basically delegating the work to the redirectRepo's own Find method (that is also
+// just satisfying the interface defined in the repository interface)
 func (r *redirectService) Find(code string) (*Redirect, error) {
 	return r.redirectRepo.Find(code)
 }
